@@ -7,6 +7,7 @@ def mostrar_menu():
     print("1. Adicionar tarefa")
     print("2. Ver tarefas")
     print("3. Sair")
+    print("4. Marcar tarefa como concluida")  # Adicionamos essa opção
 
 # Função que mostra as tarefas cadastradas
 def mostrar_tarefas():
@@ -21,6 +22,21 @@ def mostrar_tarefas():
             status = "✅" if tarefa["concluida"] else "❌"
             # Mostramos o número, título e status da tarefa
             print(f"{i}. {tarefa['titulo']} - {status}")
+
+def marcar_tarefa_concluida():
+    mostrar_tarefas()  # Mostra as tarefas pro usuário escolher
+    if not tarefas:
+        return  # Se a lista estiver vazia, sai da função
+
+    try:
+        numero = int(input("Digite o número da tarefa que deseja marcar como concluída: "))
+        if 1 <= numero <= len(tarefas):
+            tarefas[numero - 1]["concluida"] = True
+            print("Tarefa marcada como concluída!")
+        else:
+            print("Número inválido.")
+    except ValueError:
+        print("Por favor, digite um número válido.")
 
 # Loop principal do programa, que mantém o menu ativo até o usuário sair
 while True:
@@ -44,6 +60,12 @@ while True:
         print("Saindo...")
         break  # Interrompe o loop e encerra o programa
 
+    elif escolha == "4":
+        marcar_tarefa_concluida()
+
+
     # Caso a opção não seja válida, avisamos o usuário
     else:
         print("Opção inválida. Tente novamente.")
+
+
